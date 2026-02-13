@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Galentine 💕</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ffd9ec, #e6ccff, #ffe5c2);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: relative;
+}
+
+.container {
+  text-align: center;
+  max-width: 420px;
+  padding: 35px;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(25px);
+  border-radius: 30px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  color: #5c2b5e;
+  z-index: 2;
+}
+
+.layer { display: none; animation: fadeIn 0.8s ease forwards; }
+.layer.active { display: block; }
+
+button {
+  margin-top: 25px;
+  padding: 12px 28px;
+  border-radius: 40px;
+  border: none;
+  background: white;
+  color: #d63384;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ffe3f1;
+  transform: scale(1.07);
+}
+
+h1 { font-size: 24px; }
+p { font-size: 16px; line-height: 1.7; }
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(15px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* Falling flowers */
+.flower {
+  position: absolute;
+  top: -50px;
+  font-size: 22px;
+  animation: fall linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-50px) rotate(0deg); }
+  100% { transform: translateY(110vh) rotate(360deg); }
+}
+
+/* Popup */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 182, 193, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.popup-content {
+  background: white;
+  padding: 45px;
+  border-radius: 35px;
+  text-align: center;
+  animation: pop 0.6s ease forwards;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+}
+
+@keyframes pop {
+  from {transform: scale(0.6);}
+  to {transform: scale(1);}
+}
+
+.sparkle {
+  font-size: 28px;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from {opacity: 0.6;}
+  to {opacity: 1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="layer active" id="layer1">
+    <h1>okay wait…</h1>
+    <p>
+      don’t click away yet.<br>
+      this is not dramatic.<br>
+      (okay maybe a little.)
+    </p>
+    <button onclick="nextLayer(2)">open this 💌</button>
+  </div>
+
+  <div class="layer" id="layer2">
+    <h1>so basically…</h1>
+    <p>
+      life is hard.<br>
+      people are weird.<br>
+      outfits are confusing.<br>
+      and sometimes we just need someone<br>
+      who understands the assignment.
+    </p>
+    <button onclick="nextLayer(3)">continue 👀</button>
+  </div>
+
+  <div class="layer" id="layer3">
+    <h1>and listen</h1>
+    <p>
+      i need someone for:<br><br>
+      spontaneous coffee plans.<br>
+      “send me that screenshot right now.”<br>
+      random 11:47 pm breakdown talks.<br>
+      and hyping each other like we’re celebrities.
+    </p>
+    <button onclick="nextLayer(4)">one last thing 💗</button>
+  </div>
+
+  <div class="layer" id="layer4">
+    <h1>so…</h1>
+    <p>
+      officially and dramatically…<br><br>
+      will you be my galentine? 💕
+    </p>
+    <button onclick="showPopup()">yes obviously 💘</button>
+  </div>
+
+</div>
+
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <div class="sparkle">💖 ✨ 💕 ✨ 💖</div>
+    <h1>as you should.</h1>
+    <p>
+      contract sealed.<br>
+      chaos guaranteed.<br>
+      loyalty forever.<br><br>
+      we’re that duo now.
+    </p>
+  </div>
+</div>
+
+<script>
+function nextLayer(layerNumber) {
+  document.querySelectorAll('.layer').forEach(layer => {
+    layer.classList.remove('active');
+  });
+  document.getElementById('layer' + layerNumber).classList.add('active');
+}
+
+function showPopup() {
+  document.getElementById('popup').style.display = "flex";
+}
+
+/* Create falling flowers */
+function createFlower() {
+  const flower = document.createElement("div");
+  flower.classList.add("flower");
+  flower.innerHTML = "🌸";
+  flower.style.left = Math.random() * 100 + "vw";
+  flower.style.animationDuration = (3 + Math.random() * 5) + "s";
+  flower.style.fontSize = (18 + Math.random() * 20) + "px";
+  document.body.appendChild(flower);
+
+  setTimeout(() => {
+    flower.remove();
+  }, 8000);
+}
+
+setInterval(createFlower, 400);
+</script>
+
+</body>
+</html>
